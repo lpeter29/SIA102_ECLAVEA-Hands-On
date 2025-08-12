@@ -34,9 +34,10 @@ app.get(`/`,(req,res)=> {
 
         <body>
             <div class="maintenance">
-                
-                <h1>Server Under Maintenance</h1><p>We are currently performing scheduled maintenance. Please check back later.</p>  
-                <p>Thank you for your patience!</p>     
+                <h1>Server Under Maintenance</h1>
+                <p>We are currently performing scheduled maintenance. Please check back later.</p>  
+                <p>Thank you for your patience!</p>   
+                <p>(under development)</p>       
             </div>   
         </body>
         </html>
