@@ -1,34 +1,91 @@
-import React from "react";
+import React, {useState} from "react";
 import { Text, View, TextInput, TouchableOpacity, StyleSheet } from "react-native";
 
+const SERVER_URL = "https://eclavea-classmanagement.vercel.app/";
+
 export default function Index() {
+
+  const [lastName, setLastName] = useState(``);
+  const [firstName, setFirstName] = useState(``);
+  const [section, setSection] = useState(``);
+  const [status, setStatus] = useState(``);
+  const [message, setMessage] = useState(``);
+
+  const handlePresent = async ()=> {
+  setMessage("Submitting attendance...");
+    
+    try{
+      const response = await fetch(
+        SERVER_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body:JSON.stringify({
+          lastName:lastName,
+          firstName:firstName,
+          section:section,
+          status: "present",
+        }),
+        
+      });
+    }
+    catch(error)
+    {
+      console.error("Failed to submit attendance:", error);
+      setMessage("Failed to submit:${error.message}");
+    }
+  };
+
+  const handleAbsent = async ()=> {
+  setMessage("Submitting attendance...");
+  };
+
   return (
     <View style={styles.outer}>
       <View style={styles.box}>
         {/* Lastname */}
         <View style={styles.row}>
-          <Text style={styles.label}>Lastname:</Text>
-          <TextInput style={styles.input} />
+          <Text 
+          style={styles.label} >
+          Lastname:</Text>
+          <TextInput value={lastName} 
+          onChangeText={setLastName}
+          style={styles.input} 
+          placeholder="Enter Last Name"/>
         </View>
 
         {/* Firstname */}
         <View style={styles.row}>
-          <Text style={styles.label}>Firstname:</Text>
-          <TextInput style={styles.input} />
+          <Text 
+          style={styles.label}>
+          Firstname:</Text>
+          <TextInput 
+          value={firstName} 
+          onChangeText={setFirstName}
+          style={styles.input} 
+          placeholder="Enter First Name"/>
         </View>
 
         {/* Section */}
         <View style={styles.row}>
-          <Text style={styles.label}>Section:</Text>
-          <TextInput style={styles.input} />
+          <Text 
+          style={styles.label}
+          >Section:</Text>
+          <TextInput value={section} 
+          onChangeText={setSection}
+          style={styles.input} 
+          placeholder="Enter Section"/>
         </View>
 
         {/* Buttons */}
         <View style={styles.buttons}>
-          <TouchableOpacity style={[styles.btn, styles.present]}>
+          <TouchableOpacity onPress={handlePresent}
+           style={[styles.btn, styles.present]}>
             <Text style={styles.btnText}>Present</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={[styles.btn, styles.absent]}>
+          <TouchableOpacity onPress={handleAbsent} 
+            style={[styles.btn, styles.absent]}>
             <Text style={styles.btnText}>Absent</Text>
           </TouchableOpacity>
         </View>
@@ -42,14 +99,14 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#fff",
+    backgroundColor: "#063070ff",
     padding: 20,
   },
   box: {
     width: "90%",
     maxWidth: 350,
     padding: 20,
-    backgroundColor: "#f0f0f0",
+    backgroundColor: "#00b7ffff",
     borderRadius: 12,
     shadowColor: "#000",
     shadowOpacity: 0.1,
@@ -69,7 +126,7 @@ const styles = StyleSheet.create({
   },
   input: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#ffffffff",
     borderRadius: 6,
     paddingVertical: 8,
     paddingHorizontal: 12,
