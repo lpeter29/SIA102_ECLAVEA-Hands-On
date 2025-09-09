@@ -1,40 +1,35 @@
-import { Text, View, TextInput, TouchableOpacity, StyleSheet, Dimensions } from "react-native";
+import React from "react";
+import { Text, View, TextInput, TouchableOpacity, StyleSheet } from "react-native";
 
 export default function Index() {
   return (
-    <View style={styles.mainContainer}>
-      <View style={styles.card}>
-        <View style={styles.inputContainer}>
-          <Text style={styles.label}>Label 1:</Text>
-          <TextInput 
-            style={styles.input}
-            placeholder="Enter text"
-          />
+    <View style={styles.outer}>
+      <View style={styles.box}>
+        {/* Lastname */}
+        <View style={styles.row}>
+          <Text style={styles.label}>Lastname:</Text>
+          <TextInput style={styles.input} />
         </View>
 
-        <View style={styles.inputContainer}>
-          <Text style={styles.label}>Label 2:</Text>
-          <TextInput 
-            style={styles.input}
-            placeholder="Enter text"
-          />
+        {/* Firstname */}
+        <View style={styles.row}>
+          <Text style={styles.label}>Firstname:</Text>
+          <TextInput style={styles.input} />
         </View>
 
-        <View style={styles.inputContainer}>
-          <Text style={styles.label}>Label 3:</Text>
-          <TextInput 
-            style={styles.input}
-            placeholder="Enter text"
-          />
+        {/* Section */}
+        <View style={styles.row}>
+          <Text style={styles.label}>Section:</Text>
+          <TextInput style={styles.input} />
         </View>
 
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.button}>
-            <Text style={styles.buttonText}>Button 1</Text>
+        {/* Buttons */}
+        <View style={styles.buttons}>
+          <TouchableOpacity style={[styles.btn, styles.present]}>
+            <Text style={styles.btnText}>Present</Text>
           </TouchableOpacity>
-          
-          <TouchableOpacity style={styles.button}>
-            <Text style={styles.buttonText}>Button 2</Text>
+          <TouchableOpacity style={[styles.btn, styles.absent]}>
+            <Text style={styles.btnText}>Absent</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -42,63 +37,65 @@ export default function Index() {
   );
 }
 
-const windowWidth = Dimensions.get('window').width;
-
 const styles = StyleSheet.create({
-  mainContainer: {
+  outer: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  card: {
-    width: Math.min(windowWidth - 40, 500), // Responsive width with max of 500
-    backgroundColor: 'white',
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#fff",
     padding: 20,
-    borderRadius: 10,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
   },
-  inputContainer: {
+  box: {
+    width: "90%",
+    maxWidth: 350,
+    padding: 20,
+    backgroundColor: "#f0f0f0",
+    borderRadius: 12,
+    shadowColor: "#000",
+    shadowOpacity: 0.1,
+    shadowRadius: 6,
+    shadowOffset: { width: 0, height: 3 },
+    elevation: 4,
+  },
+  row: {
     flexDirection: "row",
     alignItems: "center",
-    marginBottom: 15,
+    marginBottom: 16,
   },
   label: {
-    width: 70,
-    marginRight: 10,
-    fontWeight: '500',
+    width: 90,
+    fontSize: 16,
+    color: "#333",
   },
   input: {
     flex: 1,
-    height: 40,
+    backgroundColor: "#fff",
+    borderRadius: 6,
+    paddingVertical: 8,
+    paddingHorizontal: 12,
     borderWidth: 1,
     borderColor: "#ccc",
-    borderRadius: 5,
-    paddingHorizontal: 10,
-    backgroundColor: '#ffffff',
   },
-  buttonContainer: {
+  buttons: {
     flexDirection: "row",
-    justifyContent: "space-around",
-    marginTop: 20,
+    justifyContent: "space-between",
   },
-  button: {
-    backgroundColor: "#007AFF",
-    padding: 10,
-    borderRadius: 5,
-    width: 120,
+  btn: {
+    flex: 1,
+    marginHorizontal: 6,
+    paddingVertical: 14,
+    borderRadius: 8,
     alignItems: "center",
   },
-  buttonText: {
-    color: "white",
+  present: {
+    backgroundColor: "#28a745",
+  },
+  absent: {
+    backgroundColor: "#dc3545",
+  },
+  btnText: {
+    color: "#fff",
+    fontWeight: "600",
     fontSize: 16,
-    fontWeight: '500',
   },
 });
