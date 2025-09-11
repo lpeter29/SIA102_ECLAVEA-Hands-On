@@ -11,9 +11,18 @@ export default function Index() {
   const [status, setStatus] = useState(``);
   const [message, setMessage] = useState(``);
 
+  const [locallastName, setlocalLastName] = useState(``);
+  const [localfirstName, setlocalFirstName] = useState(``);
+  const [localsection, setlocalSection] = useState(``);
+  const [localstatus, setlocalStatus] = useState(``);
+
   const handlePresent = async ()=> {
   setMessage("Submitting attendance...");
-    
+  setlocalLastName(lastName);
+  setlocalFirstName(firstName);
+  setlocalSection(section);
+  setlocalStatus("Present");
+
     try{
       const response = await fetch(
         SERVER_URL, {
@@ -38,7 +47,8 @@ export default function Index() {
   };
 
   const handleAbsent = async ()=> {
-  setMessage("Submitting attendance...");
+  setMessage("Submitting attendance..."); 
+  setlocalStatus("Absent");
   };
 
   return (
@@ -77,6 +87,10 @@ export default function Index() {
           style={styles.input} 
           placeholder="Enter Section"/>
         </View>
+
+        <Text>
+          {`Lastname: ${locallastName} firstname: ${localfirstName} section: ${localsection} status: ${localstatus}`}
+        </Text>
 
         {/* Buttons */}
         <View style={styles.buttons}>
